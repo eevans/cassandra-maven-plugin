@@ -132,7 +132,10 @@ public class CqlExecCassandraMojo extends AbstractCassandraMojo {
           {
               for (String op : StringUtils.split(cqlStatement, ";"))
               {
-                  cqlOps.add(doExec(op));
+                  if (!StringUtils.strip(op).isEmpty()) {
+                      getLog().debug("Executing CQL statement: \"\"\""+op+"\"\"\"");
+                      cqlOps.add(doExec(op));
+                  }
               }
           } else
           {
